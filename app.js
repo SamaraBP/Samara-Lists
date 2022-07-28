@@ -83,14 +83,14 @@ function addItem(clickedId) {
     }
 
     // Get length of list to assign numbered ID/class.
-    var x = document.getElementById("todoList");
+    var x = document.getElementById(anyListDiv);
     let length = x.children.length;
     console.log("list is this long: " + length);
    
     // Get the new item from text field...
-    var newItemObject = document.getElementById("todoItemField");
+    var newItemObject = document.getElementById(anyInputField);
     var newItem = newItemObject.value;
-
+    newItemObject.value = "";
 
     // Create the list elements...
     var listRow = document.createElement("div");
@@ -98,16 +98,16 @@ function addItem(clickedId) {
     var newListButton = document.createElement("div");
 
     // need to itterate each list element, give each a unique id.
-    listRow.classList.add("todoListRow" + length); //gives new number to each.
+    listRow.classList.add(anyListRow + length); //gives new number to each.
     newListElement.classList.add("item");
-    newListButton.classList.add("clearButton");
+    newListButton.classList.add("clearButton" + length); // HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     newListElement.innerHTML = newItem; //adds item to list item.
     newListButton.innerHTML = "🌸";
 
 
     // Inject list elements...
-    var todoContainer = document.getElementById("todoList");
+    var todoContainer = document.getElementById(anyListDiv);
     
     listRow.appendChild(newListElement);
     listRow.appendChild(newListButton);
