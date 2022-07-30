@@ -1,35 +1,3 @@
-// const express = require("express");
-// const app = express();
-
-// const bodyParser = require("body-parser");
-// app.use(bodyParser.urlencoded({extended: true}));
-
-
-
-// app.get("/", function(req, res){
-//     res.sendFile(__dirname + "/index.html");
-// });
-
-
-// // function to take ADD items in the form to the current list.
-//     // need to get string from form, then create new item/button element with 
-//     // text = to form string.
-
-// app.post("/", function(req, res){
-//     var addedItem = req.body.addItem;
-//     console.log(addedItem);
-// });
-
-
-// app.listen(3000, function(){
-//     console.log("Server up on 3000.")
-// });
-
-
-
-
-
-
 
 toggleList();
 removeItem();
@@ -84,12 +52,13 @@ function addItem(clickedId) {
 
     // Get length of list to assign numbered ID/class.
     var x = document.getElementById(anyListDiv);
-    let length = x.children.length;
+    let length = x.children.length - 1;
     console.log("list is this long: " + length);
    
     // Get the new item from text field...
     var newItemObject = document.getElementById(anyInputField);
     var newItem = newItemObject.value;
+    var capNewItem = newItem.charAt(0).toUpperCase() + newItem.slice(1);
     newItemObject.value = "";
 
     // Create the list elements...
@@ -99,10 +68,14 @@ function addItem(clickedId) {
 
     // need to itterate each list element, give each a unique id.
     listRow.classList.add(anyListRow + length); //gives new number to each.
-    newListElement.classList.add("item");
-    newListButton.classList.add("clearButton" + length); // HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    listRow.classList.add("removeThing" + length);
 
-    newListElement.innerHTML = newItem; //adds item to list item.
+    newListElement.classList.add("item");
+
+    newListButton.classList.add("clearButton");
+    newListButton.setAttribute("id", "removeThing" + length) //add as id?
+
+    newListElement.innerHTML = capNewItem; //adds item to list item.
     newListButton.innerHTML = "🌸";
 
 
@@ -117,8 +90,14 @@ function addItem(clickedId) {
 
 // function to REMOVE a list item when flower is pressed.
 function removeItem() {
+    console.log("entered outer clear function");
 
-    $("clearButton").click(function(){
+    $(".clearButton").click(function(event) {
 
+        console.log(event);
+        console.log('entered clear function');
+        
+        var delTarget = $(this).attr("id");
+        console.log(delTarget);
     });
 }
